@@ -61,17 +61,6 @@ Proyek ini mengintegrasikan dan terinspirasi oleh AI-support tools untuk otomati
 
 ---
 
-## 🖼️ Demo Screenshots (Rekomendasi)
-
-> *Silakan ambil tangkapan layar dari proyek kamu secara lokal dan unggah ke folder `/screenshots` lalu update path-nya di bawah ini.*
-
-- 🟦 Login Page dengan Google
-- 🟩 Filament Admin Dashboard
-- 🟧 Halaman User & Role Management
-- 🟨 Export Excel Feature
-- 🟥 Auto-Generated API Docs
-
----
 
 ## 🚀 Installation
 
