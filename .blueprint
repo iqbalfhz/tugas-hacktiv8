@@ -1,5 +1,55 @@
+created:
+    - database/factories/StudentFactory.php
+    - database/factories/AcademicYearFactory.php
+    - database/factories/LevelFactory.php
+    - database/factories/CourseFactory.php
+    - database/factories/CourseSessionFactory.php
+    - database/factories/AssessmentFactory.php
+    - database/factories/ClassroomFactory.php
+    - database/factories/EnrollmentFactory.php
+    - database/factories/BillingFactory.php
+    - database/factories/TransactionFactory.php
+    - database/migrations/2025_06_28_124756_create_students_table.php
+    - database/migrations/2025_06_28_124757_create_academic_years_table.php
+    - database/migrations/2025_06_28_124758_create_levels_table.php
+    - database/migrations/2025_06_28_124759_create_courses_table.php
+    - database/migrations/2025_06_28_124800_create_course_sessions_table.php
+    - database/migrations/2025_06_28_124801_create_assessments_table.php
+    - database/migrations/2025_06_28_124802_create_classrooms_table.php
+    - database/migrations/2025_06_28_124803_create_enrollments_table.php
+    - database/migrations/2025_06_28_124804_create_billings_table.php
+    - database/migrations/2025_06_28_124805_create_transactions_table.php
+    - app/Models/Student.php
+    - app/Models/AcademicYear.php
+    - app/Models/Level.php
+    - app/Models/Course.php
+    - app/Models/CourseSession.php
+    - app/Models/Assessment.php
+    - app/Models/Classroom.php
+    - app/Models/Enrollment.php
+    - app/Models/Billing.php
+    - app/Models/Transaction.php
+    - database/seeders/StudentSeeder.php
+    - database/seeders/AcademicYearSeeder.php
+    - database/seeders/LevelSeeder.php
+    - database/seeders/CourseSeeder.php
+    - database/seeders/SessionSeeder.php
+    - database/seeders/AssessmentSeeder.php
+    - database/seeders/ClassroomSeeder.php
+    - database/seeders/EnrollmentSeeder.php
+    - database/seeders/BillingSeeder.php
 models:
     Book: { title: string, author: string, description: text }
     Contact: { name: string }
     Post: { title: string, content: text }
     User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: 'string nullable', remember_token: 'string:100 nullable', avatar_url: 'string nullable' }
+    Student: { name: 'string:100', date_of_birth: date, sex: 'enum:male,female', relationships: { belongsTo: User, hasMany: Enrollment } }
+    AcademicYear: { year: string, relationships: { hasMany: Classroom } }
+    Level: { name: string, relationships: { hasMany: Classroom } }
+    Course: { name: string, relationships: { hasMany: Session } }
+    CourseSession: { name: string, session_date: date, session_note: string, relationships: { belongsTo: 'Course, Classroom', hasMany: Assessment } }
+    Assessment: { result: 'nullable string', relationships: { belongsTo: 'CourseSession, Enrollment' } }
+    Classroom: { name: string, relationships: { hasMany: Enrollment, belongsTo: 'AcademicYear, Level' } }
+    Enrollment: { relationships: { belongsTo: 'Student, Classroom', hasMany: 'Billing,Assessment' } }
+    Billing: { amount: 'decimal:10,2', date: date, note: string, relationships: { belongsTo: Enrollment, hasMany: Transaction } }
+    Transaction: { amount: 'decimal:10,2', date: date, status: 'enum:pending,paid,failure', order_id: 'nullable string', snap_token: 'nullable string', relationships: { belongsTo: Billing } }
