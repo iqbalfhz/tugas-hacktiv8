@@ -20,6 +20,9 @@ class ManageSetting extends SettingsPage
 
     protected static ?string $navigationGroup = 'Settings';
 
+    //add navigation label
+    protected static ?string $navigationLabel = 'System Settings';
+
     public function form(Form $form): Form
     {
         return $form
